@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "proxy": "http://localhost:6000/",
+  "proxy": "https://social-sphere-backend-0ms7.onrender.com",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
