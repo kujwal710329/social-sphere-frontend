@@ -39,29 +39,71 @@ const Form = () => {
         picturePath: picture.name,
       }),
     });
-    const savedUser = await savedUserResponse.json();
+    // const savedUser = await savedUserResponse.json();
+    const savedUser = savedUserResponse;
     window.alert("Account created successfully");
     if (savedUser) {
       setPageType("login");
     }
   };
+  // const login = async (e) => {
+  //   const loggedInResponse = await fetch("/auth/login", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ email, password }),
+  //   });
+  //   console.log(loggedInResponse);
+  //   const loggedIn = await loggedInResponse.json();
+  //   console.log(loggedIn);
+
+  //   if (loggedIn) {
+  //     dispatch(
+  //       setLogin({
+  //         user: loggedIn.user,
+  //         token: loggedIn.token,
+  //       })
+  //     );
+  //     navigate("/home");
+  //   }
+  // };
+
   const login = async (e) => {
     const loggedInResponse = await fetch("/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-    const loggedIn = await loggedInResponse.json();
-    if (loggedIn) {
-      dispatch(
-        setLogin({
-          user: loggedIn.user,
-          token: loggedIn.token,
-        })
-      );
-      navigate("/home");
+
+    if (loggedInResponse.status === 200) {
+      // Check if response body is empty
+      const contentType = loggedInResponse.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        try {
+          const loggedIn = await loggedInResponse.json();
+          console.log(loggedIn);
+
+          if (loggedIn) {
+            dispatch(
+              setLogin({
+                user: loggedIn.user,
+                token: loggedIn.token,
+              })
+            );
+            navigate("/home");
+          }
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      } else {
+        // Handle empty response body or non-JSON response here
+        console.error("Empty or non-JSON response");
+      }
+    } else {
+      // Handle error here, e.g., show an error message
+      console.error("Login failed. Status code:", loggedInResponse.status);
     }
   };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
