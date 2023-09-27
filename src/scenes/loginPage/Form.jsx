@@ -55,7 +55,7 @@ const Form = () => {
     // formData.append("picturePath", values.picture.name);
     const { firstName, lastName, email, password, location, occupation, picture } = values;
 
-    const savedUserResponse = await fetch("/auth/register", {
+    const savedUserResponse = await fetch("https://social-sphere-backend-0ms7.onrender.com/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
