@@ -73,7 +73,7 @@ const Form = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-
+    console.error(loggedInResponse);
     if (loggedInResponse.status === 200) {
       // Check if response body is empty
       const contentType = loggedInResponse.headers.get("content-type");
