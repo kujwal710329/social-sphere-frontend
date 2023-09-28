@@ -41,9 +41,12 @@ const Form = () => {
     });
     // const savedUser = await savedUserResponse.json();
     const savedUser = savedUserResponse;
-    window.alert("Account created successfully");
     if (savedUser) {
-      setPageType("login");
+      if (savedUser.status === 500) {
+        window.alert("user already exist");
+      } else {
+        setPageType("login");
+      }
     }
   };
   // const login = async (e) => {
@@ -73,16 +76,13 @@ const Form = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-    console.error(loggedInResponse);
+    // console.error(loggedInResponse);
     if (loggedInResponse.status === 200) {
       // Check if response body is empty
       const contentType = loggedInResponse.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
         try {
           const loggedIn = await loggedInResponse.json();
-          console.log(loggedIn);
-          console.error(loggedIn.user);
-          console.error(loggedIn.token);
 
           if (loggedIn) {
             dispatch(
@@ -102,6 +102,7 @@ const Form = () => {
       }
     } else {
       // Handle error here, e.g., show an error message
+      window.alert("Either email or password are incorrect");
       console.error("Login failed. Status code:", loggedInResponse.status);
     }
   };
