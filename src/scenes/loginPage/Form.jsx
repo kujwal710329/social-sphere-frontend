@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
-
+import BASE_URL from "BackendUrl";
 const Form = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -68,7 +68,7 @@ const Form = () => {
   // };
 
   const login = async (e) => {
-    const loggedInResponse = await fetch("https://social-sphere-backend-0ms7.onrender.com/auth/login", {
+    const loggedInResponse = await fetch(`{BASE_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
