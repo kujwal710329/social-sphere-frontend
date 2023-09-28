@@ -24,7 +24,7 @@ const Form = () => {
   const isRegister = pageType === "register";
 
   const register = async (e) => {
-    const savedUserResponse = await fetch("/auth/register", {
+    const savedUserResponse = await fetch(`${BASE_URL}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

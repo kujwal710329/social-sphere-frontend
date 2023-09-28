@@ -7,6 +7,7 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "state";
+import BASE_URL from "BackendUrl";
 
 const PostWidget = ({ postId, postUserId, name, description, location, picturePath, userPicturePath, likes, comments }) => {
   const [isComments, setIsComments] = useState(false);
@@ -23,7 +24,7 @@ const PostWidget = ({ postId, postUserId, name, description, location, picturePa
   // console.log(picturePath);
 
   const patchLike = async () => {
-    const response = await fetch(`/posts/${postId}/like`, {
+    const response = await fetch(`${BASE_URL}/posts/${postId}/like`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,

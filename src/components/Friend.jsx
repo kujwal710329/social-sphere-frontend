@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { setFriends } from "state";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
+import BASE_URL from "BackendUrl";
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const { palette } = useTheme();
@@ -20,7 +21,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const medium = palette.neutral.medium;
   const isFriend = friends.find(({ _id }) => _id === friendId);
   const patchFriend = async () => {
-    const response = await fetch(`/users/${_id}/${friendId}`, {
+    const response = await fetch(`${BASE_URL}/users/${_id}/${friendId}`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
