@@ -81,6 +81,8 @@ const Form = () => {
         try {
           const loggedIn = await loggedInResponse.json();
           console.log(loggedIn);
+          console.error(loggedIn.user);
+          console.error(loggedIn.token);
 
           if (loggedIn) {
             dispatch(
