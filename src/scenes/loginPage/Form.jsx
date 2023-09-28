@@ -68,7 +68,7 @@ const Form = () => {
   // };
 
   const login = async (e) => {
-    const loggedInResponse = await fetch("/auth/login", {
+    const loggedInResponse = await fetch("https://social-sphere-backend-0ms7.onrender.com/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
