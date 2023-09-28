@@ -42,7 +42,9 @@ const PostWidget = ({ postId, postUserId, name, description, location, picturePa
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
       </Typography>
-      {picturePath && <img width="100%" height="auto" alt="img" style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }} src={`{BASE_URL}/${picturePath}`} />}
+      {picturePath && (
+        <img width="100%" height="auto" alt="img" style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }} src={`${BASE_URL}/assets/${picturePath}`} />
+      )}
       <FlexBetween mt="0.25rem">
         <FlexBetween gap="1rem">
           <FlexBetween gap="0.3rem">
