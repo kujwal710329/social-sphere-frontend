@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
-import BASE_URL from "BackendUrl";
+
 const Form = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -22,6 +22,7 @@ const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
+  const baseUrl = process.env.BASE_URL;
 
   const register = async (e) => {
     const savedUserResponse = await fetch("/auth/register", {
@@ -68,7 +69,7 @@ const Form = () => {
   // };
 
   const login = async (e) => {
-    const loggedInResponse = await fetch(`${BASE_URL}/auth/login`, {
+    const loggedInResponse = await fetch(`${baseUrl}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
